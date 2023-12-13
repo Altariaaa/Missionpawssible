@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= pet.name %> | Pawpal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <!-- Include Slick Carousel CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    
+
+
+  <!-- Add the link for your favicon here -->
+  <link rel="icon" href="../images/mp-ico.png" type="image/x-icon">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat';
+      transition: all 0.2s cubic-bezier(0.34, 1.12, 0.68, 1.31);
+      -webkit-user-select: none;
+      /* Disable text selection on webkit browsers */
+      -moz-user-select: none;
+      /* Disable text selection on Mozilla */
+      user-select: none;
+      /* Disable text selection on all browsers */
+
+    }
+
+    .header ul {
+      list-style: none;
+      display: flex;
+      margin-right: 150px;
+      /* Adjust the margin as needed */
+    }
+
+    .header ul li {
+      margin: 10px;
+    }
+
+    .header ul li a {
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .header ul li a:hover {
+      color: #fff;
+      font-weight: bolder;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-left: 220px;
+      text-decoration: none;
+    }
+    
+
+    .logo-img {
+      width: 40px;
+      height: auto;
+      margin-right: 10px;
+      border-radius: 20px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      color: #000;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .header .a {
+      font-size: 50px;
+    }
+
+    .header {
+      background: #FF8E8E;
+      color: #000;
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+
+
+    .filter-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      list-style: none;
+    }
+
+  
+
+
+
+    
+
+    body {
+      margin: 100px 0 0 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      background: no-repeat;
+      background-size: cover;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://scontent.fmnl31-1.fna.fbcdn.net/v/t39.30808-6/336802005_606094074405934_8092593756980843473_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFcuCZAJqJ2DnBm56es5bZy5WMWqinb5V_lYxaqKdvlXycbX3G-SkMNjr7mqxGF4Jl308dJHWpzw9JAgvS-tIQq&_nc_ohc=iNCLdIHKOMgAX8ivtlP&_nc_ht=scontent.fmnl31-1.fna&oh=00_AfAC3kZMRv_db5BWk72bAbOG6aYG6eESa53PnGLKsOlnsA&oe=64E4A725");
+      /* Change to your background image */
+      filter: blur(10px);
+      /* Adjust the blur amount as needed */
+      z-index: -1;
+    }
+
+
+
+
+    .adopt-button {
+      padding: 8px 16px;
+      background-color: #a6efb8;
+      color: black;
+      font-size: 14px;
+      text-align: center;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: auto;
+      width: 200px;
+      /* Position the adopt button at the bottom */
+    }
+
+    .adopt-button:hover {
+      background-color: #96e8a2;
+      /* Change to your desired hover color */
+    }
+
+    .adopt-button {
+      opacity: 1;
+      /* Show the button on image hover */
+    }
+
+    /* The Modal */
+    /* Style for form container */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 10px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .modal-content {
+      width: 90%;
+    }
+
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      margin-bottom: 10px;
+      padding: 8px;
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+    }
+
+    .modal-content input[type="checkbox"],
+    .modal-content input[type="radio"] {
+      width: 15px;
+      height: 15px;
+    }
+
+
+
+
+    /* Style for form header */
+    .modal-content h2 {
+      text-align: center;
+    }
+
+    /* Style for close button */
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Style for labels and form elements */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    /* Style for radio buttons and checkboxes */
+    input[type="radio"],
+    input[type="checkbox"] {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    /* Style for the submit button */
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .circle-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #FF8E8E;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 30px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 1001;
+      /* Place it above other elements */
+      position: relative;
+      /* Added position relative for positioning the tooltip */
+    }
+
+    .circle-button:hover::after {
+      content: "Want to wait for your desired pet? Click here!";
+      /* Add your tooltip text here */
+      position: absolute;
+      top: -30px;
+      /* Adjust the distance of the tooltip from the button */
+      left: 150%;
+      /* Position the tooltip in the center of the button */
+      transform: translateX(-30%);
+      background: rgba(251, 192, 178, 1);
+      color: black;
+      padding: 2px 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      opacity: 0.9;
+      font-size: 12px;
+      pointer-events: none;
+      /* Ensure the tooltip doesn't interfere with button clicks */
+    }
+
+    .modal-content img {
+      display: inline-block;
+      margin: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .modal-content .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Center horizontally */
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    /* Style the container for pet images */
+    .pet-images {
+      display: flex;
+      justify-content: space-around;
+      
+      /* Adjust styling properties according to your layout preferences */
+    }
+
+    /* Style individual pet images */
+    .pet-images img {
+      width: 500px;
+      height: 500px;
+      margin: 0 auto; 
+      /* Add margin between images */
+      /* Add any other styles you want for individual images */
+    }
+    .pet{
+      margin: 20px;
+    }
+
+    .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Keeps text alignment to the left */
+    /* Additional styles for the container if needed */
+}
+
+.image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .image-box img {
+      width: 100%;
+      /* Adjust the width to fill the box */
+      height: 250px;
+      /* Set a fixed height */
+      object-fit: cover;
+      /* Maintain aspect ratio and cover the entire box */
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+    }
+
+    .image-box {
+      display: flex;
+      flex-direction: column;
+      width: 350px;
+      /* Adjust the width as needed */
+      margin: 20px;
+      border: 10px solid #fff;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      border-radius: 25px;
+      background-color: white;
+    }
+
+
+    .image-container .image img {
+      width: 100%;
+      /* Adjust the width to fill the box */
+      height: 250px;
+      /* Set a fixed height */
+      object-fit: cover;
+      /* Maintain aspect ratio and cover the entire box */
+    }
+
+    .image-container .image:hover img {
+      transform: scale(1.1);
+      /* Adjust the scale on hover as needed */
+    }
+
+    .similar-pets h2{
+      padding-left: 20px;
+    }
+    
+    
+  </style>
+
+
+
+
+  <script>
+    const btn = document.querySelector("button"); // Get the button from the page
+    // Detect clicks on the button
+    if (btn) {
+      btn.onclick = function () {
+        // The JS works in conjunction with the 'dipped' code in style.css
+        btn.classList.toggle("dipped");
+      };
+    }
+
+
+
+  </script>
+</head>
+
+<body>
+  <div class="header">
+    <a class="logo-container" href="/">
+      <img src="../images/icon.jpg" class="logo-img">
+      <span class="logo-text">Pawpal: Mission PAWSsible</span>
+    </a>
+
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/surrender">Surrender</a></li>
+      <li><a href="/report">Report</a></li>
+      <li><a href="/donate">Donate</a></li>
+    </ul>
+  </div>
+
+
+  <div class="pet">
+    <!-- Display pet images if available -->
+    <div class="pet-images">
+      <% if (pet.image) { %>
+        <div><img src="/<%= pet.image %>" alt="<%= pet.name %> Image 1"></div>
+      <% } %>
+      <% if (pet.image2) { %>
+        <div><img src="/<%= pet.image2 %>" alt="<%= pet.name %> Image 2"></div>
+      <% } %>
+      <% if (pet.image3) { %>
+        <div><img src="/<%= pet.image3 %>" alt="<%= pet.name %> Image 3"></div>
+      <% } %>
+      <% if (pet.image4) { %>
+        <div><img src="/<%= pet.image4 %>" alt="<%= pet.name %> Image 4"></div>
+      <% } %>
+    </div>
+  </div>
+
+  
+<div class="container">
+  <div class="adopt-button open-modal" data-pet-id="<%= pet.id %>" data-pet-type="<%= pet.petType %>"
+    data-pet-name="<%= pet.name %>" data-pet-image="/<%= pet.image %>" data-pet-image2="/<%= pet.image2 %>"
+    data-pet-image3="/<%= pet.image3 %>" data-pet-image4="/<%= pet.image4 %>"
+    data-pet-info="<%= JSON.stringify(pet) %>">Adopt <%= pet.name %> here</div>
+</div>
+<br><br>
+<div class="similar-pets">
+  <h2>Pets you may also like :</h2>
+  <div class="image-container">
+    <% similarPetsByBreed.forEach(function(similarPet) { %>
+      <div class="image-box <%= similarPet.petType.toLowerCase() %>">
+        <a href="/petdetails/<%= similarPet.id %>">
+          <img src="/<%= similarPet.image %>" alt="<%= similarPet.name %> Image">
+        </a>
+        <div class="image-description">
+          <h3><%= similarPet.name %></h3>
+          <!-- Display other information about the similar pets based on breed -->
+          <br>
+          <p><strong>Breed:</strong> <%= similarPet.breed %></p>
+          <p><strong>Age:</strong> <%= similarPet.age %> months</p>
+          <!-- Add more details if needed -->
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+
+
+</div>
+
+
+  <div class="modal" id="adoptionModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Adoption Form</h2><br>
+      <center>
+        <img id="petImage" src="" alt="Pet Image" style="max-width: 100%; max-height: 200px;">
+        <img id="petImage2" src="" alt="Pet Image" style="max-width: 100%; max-height: 200px;">
+        <img id="petImage3" src="" alt="Pet Image" style="max-width: 100%; max-height: 200px;">
+        <img id="petImage4" src="" alt="Pet Image" style="max-width: 100%; max-height: 200px;">
+      </center><br>
+      <h2>Fill up this form and adopt <span id="displaypetName"></span>!</h2>
+      <div class="profile">
+        <p><strong>Breed: </strong><span id="petBreed"></span></p>
+        <p><strong>Age: </strong><span id="petAge"></span> months</p>
+        <p><strong>Color: </strong><span id="petColor"></span></p>
+        <p><strong>Gender: </strong><span id="petGender"></span></p><br>
+
+      </div>
+
+      <!-- Add your adoption form inputs here -->
+      <form id="adoptionForm" action="/submit-adoption" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="email@address.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fullName">Name of Adopter:</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petType">Type of Pet:</label>
+          <input type="text" id="petType" name="petType" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="petName">Name of the Pet to be Adopted:</label>
+          <input type="text" id="petName" name="petName" required readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="existingPets">Existing Pets at Home:</label>
+          <textarea id="existingPets" name="existingPets" rows="4" placeholder="One Bulldog, One Siamese"
+            required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="visitDate">Visit Date for Compatibility Test:</label>
+          <input type="date" id="visitDate" name="visitDate" required>
+        </div>
+
+        <!-- Add more form fields here -->
+
+        <div class="form-group">
+          <label for="termsPolicy">Terms and Policy:</label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="agreeToAdopt" name="agreeToAdopt" required> I agree to adopt the pet of my choice
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="promiseToCare" name="promiseToCare" required> I promise to take proper care of
+            the pet
+          </label>
+
+        </div>
+
+        <div class="form-group">
+          <label for="address">Complete Address:</label>
+          <input type="text" id="address" name="address"
+            placeholder="Policarpio Residence, Sitio Kabilang Tabi Brgy. Pila Pila, Binangonan, Philippines">
+        </div>
+
+        <div class="form-group">
+          <label for="contactNumber">Contact Number:</label>
+          <input type="tel" id="contactNumber" name="contactNumber" placeholder="09123456789">
+        </div>
+
+        <div class="form-group">
+          <label for="contractDate">Date of Contract Signing:</label>
+          <input type="date" id="contractDate" name="contractDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="facebookLink">Facebook Profile Link/Name:</label>
+          <input type="text" id="facebookLink" name="facebookLink"
+            placeholder="https://www.facebook.com/missionpawssibleph">
+        </div>
+
+        <div class="form-group">
+          <label for="validId">Photo of 1 Valid ID:</label>
+          <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="validId" name="validId" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petStayingPhoto">Photo of Pet's Living Space (Indoor):</label>
+          <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="petStayingPhoto" name="petStayingPhoto" required>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+            I accept and read the terms and policy of the organization.
+            <a href="#" id="viewTermsLink" target="_blank"> View All Terms and Policy</a>
+          </label>
+
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Submit Adopt Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="loadingOverlay">
+    <div id="loadingSpinner"></div>
+  </div>
+
+
+
+
+  <!-- jquery cdn link  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  var adoptionModal = document.getElementById('adoptionModal');
+  var adoptButtons = document.querySelectorAll('.adopt-button');
+
+
+adoptButtons.forEach(function (button) {
+  button.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    if (activeModal) {
+      activeModal.style.display = 'none';
+    }
+
+    activeModal = adoptionModal;
+
+        var petType = button.getAttribute('data-pet-type');
+        var petName = button.getAttribute('data-pet-name');
+        var petImage = button.getAttribute('data-pet-image');
+        var petImage2 = button.getAttribute('data-pet-image2'); // Add this line
+        var petImage3 = button.getAttribute('data-pet-image3'); // Add this line
+        var petImage4 = button.getAttribute('data-pet-image4'); // Add this line
+        var petInfo = JSON.parse(button.getAttribute('data-pet-info'));
+
+        document.getElementById('petType').value = petType;
+        document.getElementById('petName').value = petName;
+        document.getElementById('petImage').src = petImage;
+        document.getElementById('petImage2').src = petImage2; // Add this line
+        document.getElementById('petImage3').src = petImage3; // Add this line
+        document.getElementById('petImage4').src = petImage4; // Add this line
+
+        // Display other pet information as needed
+        // Example:
+        document.getElementById('petName').innerText = petInfo.name;
+        document.getElementById('petBreed').innerText = petInfo.breed;
+        document.getElementById('petAge').innerText = petInfo.age;
+        document.getElementById('petColor').innerText = petInfo.color;
+        document.getElementById('petGender').innerText = petInfo.gender;
+
+        adoptionModal.style.display = 'block';
+      });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function () {
+  if (activeModal) {
+    activeModal.style.display = 'none';
+    activeModal = null; // Reset activeModal when the modal is closed
+  }
+});
+
+    //close modal
+    let activeModal = null;
+
+  </script>
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+    // Initialize Slick Carousel for the pet images
+    $('.pet-images').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+
+
+    //displaypetName
+        var displayPetNameElement = document.getElementById('displaypetName');
+
+// Attach a click event listener to each adopt button
+adoptButtons.forEach(function (button) {
+  button.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    // Extract the pet name from the button's attributes
+    var petName = button.getAttribute('data-pet-name');
+
+    // Display the pet name in the modal
+    displayPetNameElement.textContent = petName;
+  });
+});
+
+  </script>
+</body>
+
+</html>

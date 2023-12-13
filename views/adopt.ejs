@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawpal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+
+  <!-- Add the link for your favicon here -->
+  <link rel="icon" href="../images/mp-ico.png" type="image/x-icon">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat';
+      transition: all 0.2s cubic-bezier(0.34, 1.12, 0.68, 1.31);
+      -webkit-user-select: none;
+      /* Disable text selection on webkit browsers */
+      -moz-user-select: none;
+      /* Disable text selection on Mozilla */
+      user-select: none;
+      /* Disable text selection on all browsers */
+
+    }
+
+    .header ul {
+      list-style: none;
+      display: flex;
+      margin-right: 150px;
+      /* Adjust the margin as needed */
+    }
+
+    .header ul li {
+      margin: 10px;
+    }
+
+    .header ul li a {
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .header ul li a:hover {
+      color: #fff;
+      font-weight: bolder;
+    }
+
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-left: 220px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: auto;
+      margin-right: 10px;
+      border-radius: 20px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      color: #000;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .header .a {
+      font-size: 50px;
+    }
+
+    .header {
+      background: #FF8E8E;
+      color: #000;
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .gallery {
+      min-height: 100vh;
+      background: url("img/bg.png");
+      padding-bottom: 50px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      list-style: none;
+    }
+
+    .filter-buttons button {
+      height: 40px;
+      width: 250px;
+      background: #fff;
+      color: rgb(0, 0, 0);
+      font-size: 15px;
+      line-height: 40px;
+      cursor: pointer;
+      margin: 20px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      border-radius: 12px;
+      border: none;
+    }
+
+    .filter-buttons .active {
+      background: #FF8E8E;
+      color: #000000;
+      border-radius: 12px;
+    }
+
+    .filter-buttons :hover {
+      background-color: #FF8E8E;
+      font-weight: bolder;
+    }
+
+    .gallery .image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .top {
+      color: rgb(0, 0, 0);
+      font-family: Montserrat;
+      border: 2px solid black;
+      background: rgb(255, 255, 255);
+      border-radius: 10px;
+      height: 50px;
+      width: 100px;
+      text-align: center;
+    }
+
+    body {
+      margin: 70px 0 0 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      background: no-repeat;
+      background-size: cover;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://scontent.fmnl31-1.fna.fbcdn.net/v/t39.30808-6/336802005_606094074405934_8092593756980843473_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFcuCZAJqJ2DnBm56es5bZy5WMWqinb5V_lYxaqKdvlXycbX3G-SkMNjr7mqxGF4Jl308dJHWpzw9JAgvS-tIQq&_nc_ohc=iNCLdIHKOMgAX8ivtlP&_nc_ht=scontent.fmnl31-1.fna&oh=00_AfAC3kZMRv_db5BWk72bAbOG6aYG6eESa53PnGLKsOlnsA&oe=64E4A725");
+      /* Change to your background image */
+      filter: blur(10px);
+      /* Adjust the blur amount as needed */
+      z-index: -1;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      /* Add some space between filter choices and search bar */
+    }
+
+    #searchInput {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      font-size: 14px;
+      width: 1050px;
+      /* Adjust the width as needed */
+    }
+
+    #searchButton {
+      padding: 8px 15px;
+      background-color: rgba(251, 192, 178, 1);
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-size: 14px;
+      color: black;
+      transition: background-color 0.3s;
+      outline-width: 10px;
+      outline-color: black;
+    }
+
+    #searchButton:hover {
+      background: #FF8E8E;
+      font-weight: bolder;
+    }
+
+    .image-box {
+      display: flex;
+      flex-direction: column;
+      width: 350px;
+      /* Adjust the width as needed */
+      margin: 20px;
+      border: 10px solid #fff;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      border-radius: 25px;
+      background-color: white;
+    }
+
+    .image-box img {
+      width: 100%;
+      /* Adjust the width to fill the box */
+      height: 250px;
+      /* Set a fixed height */
+      object-fit: cover;
+      /* Maintain aspect ratio and cover the entire box */
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+    }
+
+    .image-description {
+      padding: 10px;
+      flex-grow: 1;
+      /* Allow the description to grow and take available space */
+      display: flex;
+      flex-direction: column;
+      color: #000;
+    }
+
+    .image-container .image {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      /* Adjust the height to fill the box */
+      overflow: hidden;
+      margin: 20px;
+      border-radius: 25px;
+    }
+
+    .image-container .image img {
+      width: 100%;
+      /* Adjust the width to fill the box */
+      height: 250px;
+      /* Set a fixed height */
+      object-fit: cover;
+      /* Maintain aspect ratio and cover the entire box */
+    }
+
+    .image-container .image:hover img {
+      transform: scale(1.1);
+      /* Adjust the scale on hover as needed */
+    }
+
+    .adopt-button {
+      padding: 8px 16px;
+      background-color: #a6efb8;
+      color: black;
+      font-size: 14px;
+      text-align: center;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: auto;
+      /* Position the adopt button at the bottom */
+    }
+
+    .adopt-button:hover {
+      background-color: #96e8a2;
+      /* Change to your desired hover color */
+    }
+
+    .image-container .image:hover .adopt-button {
+      opacity: 1;
+      /* Show the button on image hover */
+    }
+
+    /* The Modal */
+    /* Style for form container */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 10px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .modal-content {
+      width: 90%;
+    }
+
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      margin-bottom: 10px;
+      padding: 8px;
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+    }
+
+    .modal-content input[type="checkbox"],
+    .modal-content input[type="radio"] {
+      width: 15px;
+      height: 15px;
+    }
+
+
+
+
+    /* Style for form header */
+    .modal-content h2 {
+      text-align: center;
+    }
+
+    /* Style for close button */
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Style for labels and form elements */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    /* Style for radio buttons and checkboxes */
+    input[type="radio"],
+    input[type="checkbox"] {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    /* Style for the submit button */
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .circle-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #FF8E8E;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 30px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .circle-button:hover::after {
+      content: "Want to wait for your desired pet? Click here!";
+      /* Add your tooltip text here */
+      position: absolute;
+      top: -30px;
+      /* Adjust the distance of the tooltip from the button */
+      left: 150%;
+      /* Position the tooltip in the center of the button */
+      transform: translateX(-30%);
+      background: rgba(251, 192, 178, 1);
+      color: black;
+      padding: 2px 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      opacity: 0.9;
+      font-size: 12px;
+      pointer-events: none;
+      /* Ensure the tooltip doesn't interfere with button clicks */
+    }
+
+
+
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding-top: 20%;
+      z-index: 999;
+    }
+
+    #loadingSpinner {
+      display: inline-block;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid #3498db;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .modal-content img {
+      display: inline-block;
+      margin: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .modal-content .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Center horizontally */
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .pet-info {
+      margin-bottom: 10px;
+      /* You can adjust the margin to your preference */
+    }
+
+    /* respnsive navbar*/
+    @media (max-width: 1000px) {
+      .header {
+        background: #fcfbfb;
+      }
+
+      .header ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        /* Adjust the top position as needed */
+        left: 0;
+        width: 100%;
+        background: #fcfbfb;
+        z-index: 999;
+      }
+
+      .header ul.show {
+        display: flex;
+      }
+
+      .header ul li {
+        margin: 10px;
+        text-align: left;
+      }
+
+      .header ul li a:hover {
+        color: #FF8E8E;
+        font-weight: bolder;
+      }
+
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+        background-color: #000;
+        border-radius: 5px;
+        border: 2px solid black;
+        color: white;
+        font-size: 23px;
+        width: 50px;
+      }
+
+      .logo-container {
+        margin-left: 0;
+      }
+
+
+      .search-container.menu-open {
+        margin-top: 200px;
+        /* Same as the header height */
+      }
+    }
+
+    @media (min-width: 1000px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .header ul {
+        display: flex !important;
+        /* Adjust any other styles needed to show the menu on larger screens */
+      }
+    }
+
+
+    .terms-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  overflow: auto;
+}
+
+.modal-content-terms {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: justify; 
+}
+.modal-content-terms p{
+  margin-top: 30px;
+  text-align: justify; 
+  line-height: 1.5;
+}
+.close-terms {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-terms:hover,
+.close-terms:focus {
+  color: black;
+  text-decoration: none;
+}
+
+#doneButtonTerms {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#doneButtonTerms:hover {
+  background-color: #45a049;
+}
+  </style>
+  <script>
+    const btn = document.querySelector("button"); // Get the button from the page
+    // Detect clicks on the button
+    if (btn) {
+      btn.onclick = function () {
+        // The JS works in conjunction with the 'dipped' code in style.css
+        btn.classList.toggle("dipped");
+      };
+    }
+
+
+
+  </script>
+</head>
+
+<body>
+  <div class="header">
+    <a class="logo-container" href="/">
+      <img src="../images/icon.jpg" class="logo-img">
+      <span class="logo-text">Pawpal: Mission PAWSsible</span>
+    </a>
+
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/surrender">Surrender</a></li>
+      <li><a href="/report">Report</a></li>
+      <li><a href="/donate">Donate</a></li>
+    </ul>
+    <div class="menu-toggle">&#9776;</div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by breed, age or color">
+    <button id="searchButton">Search</button>
+  </div>
+
+  <div class="gallery">
+    <div class="filter-buttons">
+      <button class="active" data-type="all" onclick="filterPets('all')">All Pets</button>
+      <button data-type="cat" onclick="filterPets('cat')">Cats</button>
+      <button data-type="dog" onclick="filterPets('dog')">Dogs</button>
+    </div>
+
+    <div class="image-container">
+      <% pets.forEach(function(pet) { %>
+        <div class="image-box <%= pet.petType.toLowerCase() %>">
+          <a href="/petdetails/<%= pet.id %>">
+            <img src="<%= pet.image %>" /></a>
+          <div class="image-description">
+            <h3>
+              <%= pet.name %>
+            </h3><br>
+            <p><strong>Breed: </strong>
+              <%= pet.breed %>
+            </p>
+
+            <p><strong>Age: </strong>
+              <%= pet.age %>
+                <p>
+                <p><strong>Color:</strong>
+                  <%= pet.color %>
+                </p>
+                <p><strong>Gender: </strong>
+                  <%= pet.gender %>
+                </p>
+                <p><strong>Pet Type:</strong>
+                  <%= pet.petType %>
+                </p><br>
+                <p><strong>Description: </strong>
+                  <%= pet.description %>
+                </p>
+                <br>
+                <div class="adopt-button open-modal" data-pet-id="<%= pet.id %>" data-pet-type="<%= pet.petType %>"
+                  data-pet-name="<%= pet.name %>" data-pet-image="<%= pet.image %>" data-pet-image2="<%= pet.image2 %>"
+                  data-pet-image3="<%= pet.image3 %>" data-pet-image4="<%= pet.image4 %>"
+                  data-pet-info="<%= JSON.stringify(pet) %>">Adopt</div>
+          </div>
+          </a>
+        </div>
+        <% }); %>
+    </div>
+  </div>
+
+  <div class="circle-button" id="openModalButton">
+    <span>&#43;</span>
+  </div>
+
+  <div class="modal" id="requestModal"> <!-- Give it a unique ID -->
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Request a Pet</h2>
+      <form id="adoptionForm" action="/submit-request" method="post" enctype="multipart/form-data">
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <!-- Full Name -->
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <!-- Contact Number -->
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" id="contactNumber" name="contactNumber" required>
+
+        <!-- Date -->
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <!-- Type (Dog or Cat) -->
+        <label for="type">Type:</label>
+        <select id="type" name="type" onchange="updateBreedOptions()" required>
+          <option value="default">Select one</option>
+          <option value="Dog">Dog</option>
+          <option value="Cat">Cat</option>
+        </select>
+
+        <!-- Desired Breed -->
+
+        <!-- Desired Breed -->
+        <label for="breed">Desired Breed:</label>
+        <select id="breed" name="breed" onchange="checkOtherBreed()" required>
+          <option value="default">Select Breed</option>
+        </select>
+        <div class="other-breed-container"></div>
+
+        <!-- Text input for custom breed -->
+        <input type="text" class="form-control" id="otherBreed" style="display: none;" placeholder="Enter Other Breed"
+          name="customBreed" /> <!-- Change the name to "customBreed" or any other unique name -->
+
+        <!-- Sex -->
+
+        <label for="sex">Sex:</label>
+        <div class="radio-container" style="display: flex; margin-right: 10px; gap: 10px;">
+          <label class="radio-inline">
+            <input type="radio" id="male" name="sex" value="male"> Male
+          </label>
+          <label class="radio-inline">
+            <input type="radio" id="female" name="sex" value="female">Female
+          </label>
+        </div>
+
+
+
+        <!-- Desired Color -->
+        <label for="color">Desired Color:</label>
+        <input type="text" id="color" name="color" required>
+
+        <!-- Age Preference -->
+        <label for="agePreference">Age Preference:</label>
+        <input type="text" id="agePreference" name="agePreference" required>
+
+        <!-- Valid ID -->
+        <label for="validId">Upload a Photo of a Valid ID (Accepted formats: .jpg, .jpeg, .png, .pdf):</label>
+        <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="validId" name="validId" required>
+
+        <!-- Picture with Valid ID -->
+        <label for="pictureWithId">Upload a Picture of You with Your Valid ID:</label>
+        <input type="file" accept=".jpg, .jpeg, .png" id="pictureWithId" name="pictureWithId" required>
+
+        <!-- Add more form fields as needed -->
+
+        <button type="submit">Submit Pet Request</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal" id="adoptionModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Adoption Form</h2><br>
+      <center>
+        <img id="petImage" src="" alt="Pet Image" style="max-width: 100%; max-height: 200px;">
+
+      </center><br>
+      <h2>Adopt <span id="displaypetName"></span>!</h2>
+      <div class="profile">
+        <p class="pet-info"><strong>Breed: </strong><span id="petBreed"></span></p>
+        <p class="pet-info"><strong>Age: </strong><span id="petAge"></span> months</p>
+        <p class="pet-info"><strong>Color: </strong><span id="petColor"></span></p>
+        <p class="pet-info"><strong>Gender: </strong><span id="petGender"></span></p><br>
+
+      </div>
+
+      <!-- Add your adoption form inputs here -->
+      <form id="adoptionForm" action="/submit-adoption" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="email@address.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fullName">Name of Adopter:</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petType">Type of Pet:</label>
+          <input type="text" id="petType" name="petType" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="petName">Name of Pet to be Adopted:</label>
+          <input type="text" id="petName" name="petName" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="existingPets">Existing Pets at Home:</label>
+          <textarea id="existingPets" name="existingPets" rows="4" placeholder="One Bulldog, One Siamese"
+            required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="visitDate">Visit Date for Compatibility Test:</label>
+          <input type="date" id="visitDate" name="visitDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="termsPolicy">Terms and Policy:</label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="agreeToAdopt" name="agreeToAdopt" required> I agree to adopt the pet of my choice
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="promiseToCare" name="promiseToCare" required> I promise to take proper care of
+            the pet
+          </label>
+
+        </div>
+
+        <div class="form-group">
+          <label for="address">Complete Address:</label>
+          <input type="text" id="address" name="address"
+            placeholder="Policarpio Residence, Sitio Kabilang Tabi Brgy. Pila Pila, Binangonan, Philippines">
+        </div>
+
+        <div class="form-group">
+          <label for="contactNumber">Contact Number:</label>
+          <input type="tel" id="contactNumber" name="contactNumber" placeholder="09123456789">
+        </div>
+
+        <div class="form-group">
+          <label for="contractDate">Date of Contract Signing:</label>
+          <input type="date" id="contractDate" name="contractDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="facebookLink">Facebook Profile Link/Name:</label>
+          <input type="text" id="facebookLink" name="facebookLink"
+            placeholder="https://www.facebook.com/missionpawssibleph">
+        </div>
+
+        <div class="form-group">
+          <label for="validId">Photo of 1 Valid ID:</label>
+          <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="validId" name="validId" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petStayingPhoto">Photo of Pet's Living Space (Indoor):</label>
+          <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="petStayingPhoto" name="petStayingPhoto" required>
+        </div>
+
+        <div class="form-group">
+          <label for="selfie">Selfie with your Valid ID</label>
+          <input type="file" accept=".jpg, .jpeg, .png, .pdf" id="selfie" name="selfie" required>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+            I accept and read the terms and policy of the organization.
+            <a href="#" id="viewTermsLink"> View All Terms and Policy</a>
+          </label>
+        </div>
+
+        <!-- The Modal -->
+        <div id="termsModal" class="terms-modal">
+          <div class="modal-content-terms">
+            <span class="close-terms">&times;</span>
+            <p>
+              Mission PAWSsible can pull out the dog/cat anytime at their discretion if seen neglected by the adopters
+              regardless of how many advise given if seen not suitable for the adopter for a reason. SCREENING DOES NOT
+              END HERE.
+              (Maaaring bawiin ng Mission PAWSsible ang aso/pusa kahit kailan kapag nakitang pabaya ang mga nag-ampon at
+              nakitang hindi karapat-dapat ang nag-ampon sa aso/pusang inampon sa kahit anumang dahilan. HINDI
+              NAGTATAPOS ANG SCREENING DITO.)
+            </p>
+            <center><button id="doneButtonTerms">Proceed</button></center>
+          </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <center><button type="submit">Submit Adopt Application</button></center>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="loadingOverlay">
+    <div id="loadingSpinner"></div>
+  </div>
+
+
+
+
+  <!-- jquery cdn link  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+    const viewTermsLink = document.getElementById('viewTermsLink');
+    const modalTerms = document.getElementById('termsModal');
+    const closeButtonTerms = document.getElementsByClassName('close-terms')[0];
+    const doneButtonTerms = document.getElementById('doneButtonTerms');
+
+    viewTermsLink.addEventListener('click', function (event) {
+      event.preventDefault();
+      modalTerms.style.display = 'block';
+    });
+
+    closeButtonTerms.addEventListener('click', function () {
+      modalTerms.style.display = 'none';
+    });
+
+    doneButtonTerms.addEventListener('click', function () {
+      modalTerms.style.display = 'none';
+    });
+  </script>
+  <script>
+    // Get the modal elements
+    var adoptionModal = document.getElementById('adoptionModal');
+    var requestModal = document.getElementById('requestModal');
+
+    // Get the buttons that open the modals
+    var adoptButtons = document.querySelectorAll('.adopt-button');
+    var openModalButton = document.getElementById('openModalButton');
+
+    adoptButtons.forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (activeModal) {
+          activeModal.style.display = 'none';
+        }
+
+        activeModal = adoptionModal;
+
+        var petType = button.getAttribute('data-pet-type');
+        var petName = button.getAttribute('data-pet-name');
+        var petImage = button.getAttribute('data-pet-image');
+        var petInfo = JSON.parse(button.getAttribute('data-pet-info'));
+
+        // Set the values in the modal
+        document.getElementById('petType').value = petType;
+        document.getElementById('petName').value = petName; // Change this line to set the value of the input field
+        document.getElementById('petImage').src = petImage;
+
+
+        // Display other pet information as needed
+        // Example:
+        document.getElementById('petName').innerText = petInfo.name;
+        document.getElementById('petBreed').innerText = petInfo.breed;
+        document.getElementById('petAge').innerText = petInfo.age;
+        document.getElementById('petColor').innerText = petInfo.color;
+        document.getElementById('petGender').innerText = petInfo.gender;
+
+        adoptionModal.style.display = 'block';
+      });
+    });
+    // Attach a click event listener to the circular button
+    openModalButton.addEventListener('click', function () {
+      if (activeModal) {
+        activeModal.style.display = 'none';
+      }
+
+      // Set the active modal to the request modal
+      activeModal = requestModal;
+
+      // Open the request modal
+      requestModal.style.display = 'block';
+    });
+
+    // Close the adoption modal when the close button is clicked
+    var closeAdoptionModalButton = adoptionModal.querySelector('.close');
+    closeAdoptionModalButton.addEventListener('click', function () {
+      adoptionModal.style.display = 'none';
+      activeModal = null; // Reset the active modal
+    });
+
+    // Close the request modal when the close button is clicked
+    var closeRequestModalButton = requestModal.querySelector('.close');
+    closeRequestModalButton.addEventListener('click', function () {
+      requestModal.style.display = 'none';
+      activeModal = null; // Reset the active modal
+    });
+
+    // Close the modals when the user clicks outside of them
+    window.addEventListener('click', function (event) {
+      if (event.target == adoptionModal) {
+        adoptionModal.style.display = 'none';
+      }
+      if (event.target == requestModal) {
+        requestModal.style.display = 'none';
+      }
+    });
+
+
+
+
+    function filterPets(type) {
+      const imageBoxes = document.querySelectorAll('.image-box');
+      imageBoxes.forEach(box => {
+        if (type === 'all') {
+          box.style.display = 'block';
+        } else {
+          const petType = box.classList.contains(type) ? type : 'other';
+          box.style.display = petType === type ? 'block' : 'none';
+        }
+      });
+
+      // Toggle active class for buttons
+      const buttons = document.querySelectorAll('.filter-buttons button');
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+      const activeButton = document.querySelector(`.filter-buttons button[data-type='${type}']`);
+      activeButton.classList.add('active');
+    }
+
+    //active class to button
+    const buttons = document.querySelectorAll('.filter-buttons button');
+
+    // Attach a click event listener to each button
+    buttons.forEach(button => {
+      button.addEventListener('click', function () {
+        // Remove the 'active' class from all buttons
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Add the 'active' class to the clicked button
+        this.classList.add('active');
+      });
+    });
+
+    //search filter
+    function searchPets() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const imageDescriptions = document.querySelectorAll('.image-description');
+
+      imageDescriptions.forEach(description => {
+        const petDetails = description.innerText.toLowerCase();
+        const petMatches = petDetails.includes(searchTerm);
+        description.parentElement.style.display = petMatches ? 'block' : 'none';
+      });
+    }
+
+    // Attach event listeners for the search functionality
+    const searchButton = document.getElementById('searchButton');
+    searchButton.addEventListener('click', searchPets);
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', searchPets);
+    // You can also capture the pet ID when the "Adopt" button is clicked
+    // and use it in your form submission if needed
+
+
+
+
+
+    // Update breed options based on the selected type
+    function updateBreedOptions() {
+      var type = document.getElementById("type").value; // Use the correct id for the type select element
+      var breedSelect = document.getElementById("breed");
+      var otherBreedInput = document.getElementById("otherBreed");
+
+      // Clear previous options
+      breedSelect.innerHTML = '<option value="default">Select Breed</option>';
+
+      if (type === "Dog") { // Use the correct type values (Dog or Cat)
+        // Add dog breed options
+        var dogBreeds = ["Aspin", "Shih Tzu", "S. Husky", "Labrador"];
+        for (var i = 0; i < dogBreeds.length; i++) {
+          var option = document.createElement("option");
+          option.text = dogBreeds[i];
+          breedSelect.add(option);
+        }
+      } else if (type === "Cat") { // Use the correct type values (Dog or Cat)
+        // Add cat breed options
+        var catBreeds = ["Siamese", "Persian", "Maine Coon"];
+        for (var i = 0; i < catBreeds.length; i++) {
+          var option = document.createElement("option");
+          option.text = catBreeds[i];
+          breedSelect.add(option);
+        }
+      }
+
+      // Add the "Other" option
+      var otherOption = document.createElement("option");
+      otherOption.value = "other";
+      otherOption.text = "Other";
+      breedSelect.add(otherOption);
+    }
+
+
+
+    document.getElementById('adoptionForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      // Fetch data from the form
+      const formData = new FormData(this);
+
+      try {
+        // Send a POST request to the server
+        const response = await fetch('/submit-request', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          // Display a success message
+          alert('Pet request submitted successfully!');
+          // Reset the form or close the modal
+          document.getElementById('requestModal').style.display = 'none'; // Reset the form
+          // OR
+          // document.getElementById('requestModal').style.display = 'none'; // Close the modal
+        } else {
+          // Display an error message
+          alert('Failed to submit pet request. Please try again.');
+        }
+      } catch (error) {
+        console.error(error);
+        // Display a generic error message
+        alert('An error occurred. Please try again later.');
+      }
+    });
+
+
+
+    //close modal
+    let activeModal = null;
+
+    //displaypetName
+    var displayPetNameElement = document.getElementById('displaypetName');
+
+    // Attach a click event listener to each adopt button
+    adoptButtons.forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Extract the pet name from the button's attributes
+        var petName = button.getAttribute('data-pet-name');
+
+        // Display the pet name in the modal
+        displayPetNameElement.textContent = petName;
+      });
+    });
+
+    // responsive header
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navList = document.querySelector(".header ul");
+      const container = document.querySelector(".container");
+
+      menuToggle.addEventListener("click", function () {
+        navList.classList.toggle("show");
+        container.classList.toggle("menu-open");
+      });
+
+      // Close the menu when a link is clicked
+      const navLinks = document.querySelectorAll(".header ul li a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          navList.classList.remove("show");
+          container.classList.remove("menu-open");
+        });
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

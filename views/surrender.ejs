@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surrender a pet</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+  <link rel="icon" href="../images/mp-ico.png" type="image/x-icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+  body {
+    margin-top: 40px;
+    background-color: white;
+    font-family: "Montserrat";
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat";
+    transition: all 0.2s cubic-bezier(0.34, 1.12, 0.68, 1.31);
+  }
+
+  .header ul {
+    list-style: none;
+    display: flex;
+    margin-right: 150px;
+    /* Adjust the margin as needed */
+  }
+
+  .header ul li {
+    margin: 10px;
+  }
+
+  .header ul li a {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .header ul li a:hover {
+    color: #fff;
+    font-weight: bolder;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 220px;
+    text-decoration: none;
+  }
+
+  .logo-img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 20px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+    color: #000;
+  }
+
+  .header h1 {
+    margin: 0;
+  }
+
+  .header .a {
+    font-size: 50px;
+  }
+
+  .header {
+    background: #FF8E8E;
+    color: #000;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .stepwizard-step p {
+    margin-top: 10px;
+  }
+
+  .stepwizard-row {
+    display: table-row;
+  }
+
+  .stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+    margin-top: 100px;
+    font-family: "Montserrat";
+
+  }
+
+  .stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+
+
+  }
+
+  .stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #FF8E8E;
+  }
+
+  .stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+  }
+
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    background-color: #FF8E8E;
+  }
+
+  h2,
+  h4 {
+    font-weight: bold;
+  }
+
+  .other-breed-container {
+    margin-top: 30px;
+    width: 200px;
+    /* You can adjust the spacing by changing the margin value */
+  }
+
+  .button3 {
+    margin-bottom: 30px;
+  }
+
+  .control-label {
+    font-size: 15px;
+  }
+
+  /* respnsive navbar*/
+  @media (max-width: 1000px) {
+    .header {
+      background: #fcfbfb;
+    }
+
+    .header ul {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      /* Adjust the top position as needed */
+      left: 0;
+      width: 100%;
+      background: #fcfbfb;
+      z-index: 999;
+    }
+
+    .header ul li a:hover {
+      color: #FF8E8E;
+      font-weight: bolder;
+    }
+
+    .header ul.show {
+      display: flex;
+    }
+
+    .header ul li {
+      margin: 10px;
+      text-align: left;
+    }
+
+    .menu-toggle {
+      display: block;
+      cursor: pointer;
+      background-color: #000;
+      border-radius: 5px;
+      border: 2px solid black;
+      color: white;
+      font-size: 23px;
+      width: 50px;
+    }
+
+    .logo-container {
+      margin-left: 0;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .header ul {
+      display: flex !important;
+      /* Adjust any other styles needed to show the menu on larger screens */
+    }
+  }
+</style>
+
+<body>
+  <div class="header">
+    <a class="logo-container" href="/">
+      <img src="../images/icon.jpg" class="logo-img">
+      <span class="logo-text">Pawpal: Mission PAWSsible</span>
+    </a>
+
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/adopt">Adopt</a></li>
+      <li><a href="/report">Report</a></li>
+      <li><a href="/donate">Donate</a></li>
+    </ul>
+
+    <div class="menu-toggle">&#9776;</div>
+  </div>
+  <div class="container">
+    <div class="stepwizard">
+      <div class="stepwizard-row setup-panel">
+        <div class="stepwizard-step">
+          <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+          <p>Step 1</p>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+          <p>Step 2</p>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+          <p>Step 3</p>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+          <p>Step 4</p>
+        </div>
+      </div>
+    </div>
+    <form role="form" action="/submit-surrender" method="POST" enctype="multipart/form-data">
+      <!-- Step 1 -->
+      <div class="row setup-content" id="step-1">
+        <div class="col-xs-12">
+          <div class="col-md-12">
+            <center>
+              <h2>Step 1</h2>
+              <h4>Owner Details</h4>
+            </center>
+            <!-- Step 1 fields -->
+            <div class="form-group">
+              <label class="control-label">Email</label>
+              <input maxlength="100" type="email" required="required" class="form-control" placeholder="Enter Email"
+                name="email" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Date</label>
+              <input type="date" required="required" class="form-control" name="date" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Name of the Owner</label>
+              <input maxlength="100" type="text" required="required" class="form-control"
+                placeholder="Enter Name of the Owner" name="ownerName" />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Contact Number</label>
+              <input maxlength="11" type="text" required="required" class="form-control"
+                placeholder="Enter Contact Number" name="contact" />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Full Address</label>
+              <input maxlength="100" type="text" required="required" class="form-control"
+                placeholder="Enter Full Address" name="fullAddress" />
+            </div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="row setup-content" id="step-2">
+        <div class="col-xs-12">
+          <div class="col-md-12">
+            <center>
+              <h2>Step 2</h2>
+              <h4>Pet Details</h4>
+            </center>
+            <!-- Step 2 fields -->
+            <div class="form-group">
+              <label class="control-label">Pet Type</label>
+              <select required="required" class="form-control" id="petType" name="petType"
+                onchange="updateBreedOptions()">
+                <option value="default">Select one</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Name of the Pet</label>
+              <input maxlength="200" type="text" required="required" class="form-control"
+                placeholder="Enter Name of the Pet" name="petName" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Date of Birth</label>
+              <input type="date" required="required" class="form-control" name="dateOfBirth" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Breed</label>
+              <select required="required" class="form-control" id="breed" name="breed" onchange="checkOtherBreed()">
+                <option value="default">Select Breed</option>
+              </select>
+              <div class="other-breed-container">
+                <input type="text" class="form-control" id="otherBreed" style="display: none;"
+                  placeholder="Enter Other Breed" name="breed" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Color</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Color"
+                name="color" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Sex</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="sex" value="male"> Male
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="sex" value="female"> Female
+              </label>
+            </div>
+            <button class="btn btn-default prevBtn btn-lg pull-left" type="button">
+              Prev
+            </button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="row setup-content" id="step-3">
+        <div class="col-xs-12">
+          <div class="col-md-12">
+            <center>
+              <h2>Step 3</h2>
+              <h4>Pet Condition</h4>
+            </center>
+            <br>
+            <!-- Step 3 fields -->
+            <div class="form-group">
+              <label class="control-label">Is the animal spayed/neutered?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="spayedNeutered" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="spayedNeutered" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Has the animal been vaccinated either anti-rabies, 5-in-1, or anti-kennel
+                cough?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="vaccinated" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="vaccinated" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Has the animal had any medical concerns in the past?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="medicalConcerns" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="medicalConcerns" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Does the animal currently have any medical issues?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="currentMedicalIssues" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="currentMedicalIssues" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Has the animal ever shown any kind of aggression towards people and other
+                animals?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="aggression" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="aggression" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Has the animal ever bit another person or animal?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="biting" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="biting" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Is the animal leash trained/cage trained?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="leashCageTrained" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="leashCageTrained" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Is the animal good with other dogs/cats?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="goodWithOtherPets" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="goodWithOtherPets" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Is the animal good with children?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="goodWithChildren" value="yes"> Yes
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="goodWithChildren" value="no"> No
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Is the animal kept indoors or outdoors?</label><br>
+              <label class="radio-inline">
+                <input type="radio" name="indoorOutdoor" value="indoors"> Indoors
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="indoorOutdoor" value="outdoors"> Outdoors
+              </label> <br>
+            </div>
+            <button class="btn btn-default prevBtn btn-lg pull-left button3" type="button">Prev</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right button3" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+          <div class="col-md-12">
+            <center>
+              <h2>Step 4</h2>
+              <h4>Owner Verification</h4>
+            </center>
+            <!-- Step 4 fields -->
+            <div class="form-group">
+              <label class="control-label">SURRENDER FEES:</label>
+              <p>DOG: P500<br>FOR SPAYED/NEUTERED DOG: P300<br>VACCINATED DOG: P300</p>
+              <p>CAT: P300<br>SPAYED/NEUTERED CAT: P200<br>VACCINATED CAT: P200</p>
+              <p>SURRENDER FEES ARE REPLACEABLE WITH NFA RICE, DOG FOOD OR CAT FOOD. (MAAARING GAWING PAMALIT SA
+                SURRENDER FEE ANG NFA RICE, DOG FOOD O CAT FOOD)</p>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Method of Payment for the Surrender Fee:</label>
+              <select required="required" class="form-control" id="paymentMethod" name="paymentMethod">
+                <option value="Gcash">Gcash</option>
+                <option value="Cash">Cash</option>
+                <option value="Paymaya">Paymaya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Agreement:</label>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" required="required" name="agreementAccepted"> I undersigned, being the owner or
+                  having control of the described animal is releasing Mission PAWSsible from all risk and damage that
+                  may arise from any cause, do hereby, surrender the described animal to Mission Pawssible. I hereby
+                  agree to indemnify and save Mission Pawssible from all claims, actions, or demands which may be made
+                  against it by anyone claiming to be the owner of said animal or otherwise. Signing this agreement
+                  transfers all responsibility and rights of ownership from myself to Mission Pawssible.
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Upload Valid ID:</label>
+              <input type="file" accept=".jpg, .jpeg, .png, .pdf" class="form-control" id="validId" required="required"
+                name="validId" />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Upload Selfie with Valid ID:</label>
+              <input type="file" accept=".jpg, .jpeg, .png, .pdf" class="form-control" id="selfie" required="required"
+                name="selfie" />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Picture of the Pet:</label>
+              <input type="file" accept=".jpg, .jpeg, .png, .pdf" class="form-control" id="petpic" required="required"
+                name="petpic" />
+            </div>
+            <button class="btn btn-default prevBtn btn-lg pull-left" type="button">Prev</button>
+            <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+<script>
+  $(document).ready(function () {
+    var navListItems = $("div.setup-panel div a"),
+      allWells = $(".setup-content"),
+      allNextBtn = $(".nextBtn"),
+      allPrevBtn = $(".prevBtn");
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+      e.preventDefault();
+      var $target = $($(this).attr("href")),
+        $item = $(this);
+
+      if (!$item.hasClass("disabled")) {
+        navListItems.removeClass("btn-primary").addClass("btn-default");
+        $item.addClass("btn-primary");
+        allWells.hide();
+        $target.show();
+        $target.find("input:eq(0)").focus();
+      }
+    });
+
+    allNextBtn.click(function () {
+      var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        nextStepWizard = $(
+          'div.setup-panel div a[href="#' + curStepBtn + '"]'
+        )
+          .parent()
+          .next()
+          .children("a"),
+        curInputs = curStep.find("input[type='text'],input[type='url']"),
+        isValid = true;
+
+      $(".form-group").removeClass("has-error");
+      for (var i = 0; i < curInputs.length; i++) {
+        if (!curInputs[i].validity.valid) {
+          isValid = false;
+          $(curInputs[i]).closest(".form-group").addClass("has-error");
+        }
+      }
+
+      if (isValid) nextStepWizard.removeAttr("disabled").trigger("click");
+    });
+
+    allPrevBtn.click(function () {
+      var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        prevStepWizard = $(
+          'div.setup-panel div a[href="#' + curStepBtn + '"]'
+        )
+          .parent()
+          .prev()
+          .children("a");
+
+      $(".form-group").removeClass("has-error");
+      prevStepWizard.removeAttr("disabled").trigger("click");
+    });
+
+    $("div.setup-panel div a.btn-primary").trigger("click");
+  });
+
+
+  //breed options
+  function updateBreedOptions() {
+    var petType = document.getElementById("petType").value;
+    var breedSelect = document.getElementById("breed");
+    var otherBreedInput = document.getElementById("otherBreed");
+
+    // Clear previous options
+    breedSelect.innerHTML = '<option value="default">Select Breed</option>';
+
+    if (petType === "dog") {
+      // Add dog breed options
+      var dogBreeds = ["Aspin", "Shih Tzu",  "S. Husky", "Labrador", ];
+      for (var i = 0; i < dogBreeds.length; i++) {
+        var option = document.createElement("option");
+        option.text = dogBreeds[i];
+        breedSelect.add(option);
+      }
+    } else if (petType === "cat") {
+      // Add cat breed options
+      var catBreeds = ["Siamese", "Persian", "Puspin"];
+      for (var i = 0; i < catBreeds.length; i++) {
+        var option = document.createElement("option");
+        option.text = catBreeds[i];
+        breedSelect.add(option);
+      }
+    }
+
+    // Add the "Other" option
+    var otherOption = document.createElement("option");
+    otherOption.value = "other";
+    otherOption.text = "Other";
+    breedSelect.add(otherOption);
+  }
+
+  function checkOtherBreed() {
+    var breedSelect = document.getElementById("breed");
+    var otherBreedInput = document.getElementById("otherBreed");
+
+    if (breedSelect.value === "other") {
+      otherBreedInput.style.display = "block";
+    } else {
+      otherBreedInput.style.display = "none";
+    }
+  }
+
+  // Initialize breed options when the page loads
+  updateBreedOptions();
+
+  // responsive header
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navList = document.querySelector(".header ul");
+    const container = document.querySelector(".container");
+
+    menuToggle.addEventListener("click", function () {
+      navList.classList.toggle("show");
+      container.classList.toggle("menu-open");
+    });
+
+    // Close the menu when a link is clicked
+    const navLinks = document.querySelectorAll(".header ul li a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        navList.classList.remove("show");
+        container.classList.remove("menu-open");
+      });
+    });
+  });
+
+</script>
+
+</html>

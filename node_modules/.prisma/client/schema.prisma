@@ -1,0 +1,151 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId 
+  fullname       String?
+  username       String  
+  email          String   @unique
+  password       String   
+}
+
+model Pet {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId 
+  name            String
+  breed           String
+  age             Int
+  color           String
+  gender          String
+  description     String?
+  petType         String?   // Add the new petType field
+  image           String?  // Add the image field with an optional "?" to indicate it may be null
+  image2          String?
+  image3          String?
+  image4          String?
+  adopted         Boolean  @default(false) // New "archived" field
+
+}
+
+model Report {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  completeLocation   String
+  landmark           String
+  status             String
+  email              String
+  phone              String
+  petImage           String?
+  message            String
+  archived           Boolean  @default(false)
+  reportstatus             Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Surrender {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId 
+  email                String
+  date                 DateTime 
+  ownerName            String
+  contact              String
+  fullAddress          String
+  petType              String   
+  petName              String
+  dateOfBirth          DateTime 
+  breed                String   
+  color                String
+  sex                  String
+  spayedNeutered       String
+  vaccinated           String
+  medicalConcerns      String
+  currentMedicalIssues String
+  aggression           String
+  biting               String
+  leashCageTrained     String
+  goodWithOtherPets    String
+  goodWithChildren     String
+  indoorOutdoor        String 
+  paymentMethod        String
+  agreementAccepted    Boolean  
+  validId              String?   // Store a URL or file path to the uploaded ID --\
+  selfie               String?
+  petpic               String?
+  archived             Boolean  @default(false) // New "archived" field
+}
+
+model ContactFormEntry {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String
+  phone      String
+  message    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Adoption {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId 
+  email                String
+  fullName             String
+  petType              String  
+  petName              String
+  existingPets         String
+  visitDate            DateTime 
+  agreeToAdopt         Boolean
+  promiseToCare        Boolean
+  acceptTerms          Boolean
+  address              String
+  contactNumber        String
+  contractDate         DateTime  
+  facebookLink         String
+  validId              String?  
+  petStayingPhoto      String?  
+  selfie               String?
+  archived             Boolean  @default(false) // New "archived" field
+}
+
+
+model PetRequest {
+  id               String       @id @default(auto()) @map("_id") @db.ObjectId 
+  email            String
+  fullName         String
+  contactNumber    String
+  date             DateTime
+  type             String
+  breed            String
+  sex              String
+  color            String
+  agePreference    String
+  validId          String?
+  pictureWithId    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  archived             Boolean  @default(false) // New "archived" field
+}
+
+model Adopt {
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId 
+  name              String
+  type              String
+  breed             String
+  adopter           String
+  address           String
+  contact           String
+  date              DateTime  
+}
+
+
+model Donation {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId 
+  name       String
+  date       DateTime
+  amount     Float
+  reference  Int
+  payment    String
+}
